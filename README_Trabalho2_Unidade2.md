@@ -1,5 +1,5 @@
 
-# Trabalho 2 — Unidade 2 (A* + MST) — **Solução Completa (v2)**
+# Trabalho 2 — Unidade 2 (A* + MST)
 
 Este projeto integra os conceitos de **busca heurística (A\*)** e **Árvore Geradora Mínima (MST)** aplicados à malha viária real de cidades brasileiras.  
 O objetivo é **estimar a distância total mínima necessária para interligar pontos de interesse (POIs)** em cada cidade, utilizando dados reais obtidos do **OpenStreetMap** através da biblioteca **OSMnx**, combinados com os algoritmos do **NetworkX**.
