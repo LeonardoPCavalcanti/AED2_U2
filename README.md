@@ -43,6 +43,25 @@ Assim, ao combinar ambos, obtemos uma estimativa do **menor comprimento total ne
 
 ---
 
+## 🛠️ Tecnologias Utilizadas
+
+- **Python 3.13+**: Linguagem de programação principal utilizada no projeto.
+- **OSMnx**: Biblioteca para obtenção e manipulação de dados do OpenStreetMap.
+- **NetworkX**: Biblioteca para criação, manipulação e análise de grafos complexos.
+- **Jupyter Notebook**: Ambiente interativo para desenvolvimento e apresentação do projeto.
+- **Pandas** - Processamento de dados.
+- **Matplotlib** - Visualização de grafos 2D.
+
+---
+
+### 💻 Ferramentas e Ambientes
+- [Jupyter Notebook](https://jupyter.org/) - Ambiente interativo de desenvolvimento
+- [Google Colab](https://colab.research.google.com/) - Ambiente online gratuito para notebooks
+- [Anaconda](https://www.anaconda.com/) - Distribuição Python para ciência de dados
+- [Visual Studio Code](https://code.visualstudio.com/) - Editor de código recomendado
+
+---
+
 ## 📊 Resultados Obtidos
 
 | Cidade                        | POIs | MST_total_m | Status | Tempo (s) |
@@ -85,8 +104,19 @@ A combinação entre **A\*** e **MST** provou ser uma ferramenta eficiente para 
 O estudo evidencia que cidades mais densas e planejadas exigem menor comprimento de vias para interligar serviços essenciais, enquanto cidades com expansão desordenada ou obstáculos naturais apresentam custos maiores.  
 Com ajustes e ampliações, este modelo pode evoluir para uma poderosa abordagem de **planejamento urbano baseado em dados abertos**.
 
+---
+
 ## 🧑‍💻 Autores 
 Lucas Marques dos Santos e Leonardo Pessoa Cavalcanti. 
 
-## 📹 Link para vídeo sobre o projeto
-Link: https://drive.google.com/file/d/1zHTAW9ncozjCjFKDrhrepqUBXyDiaaqz/view?usp=sharing
+---
+
+## 🔗 Links Úteis
+
+- [Documentação do Python](https://docs.python.org/3/)
+- [Documentação do OSMnx](https://osmnx.readthedocs.io/)
+- [Documentação do NetworkX](https://networkx.org/documentation/stable/)
+- [Jupyter Notebook](https://jupyter.org/)
+- [Documentação do Pandas](https://pandas.pydata.org/docs/) 
+- [Documentação do Matplotlib](https://matplotlib.org/stable/index.html)
+- [Vídeo Sobre o Projeto](https://drive.google.com/file/d/1zHTAW9ncozjCjFKDrhrepqUBXyDiaaqz/view?usp=sharing)
