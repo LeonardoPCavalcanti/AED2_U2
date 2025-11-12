@@ -86,7 +86,7 @@ O estudo evidencia que cidades mais densas e planejadas exigem menor comprimento
 Com ajustes e ampliações, este modelo pode evoluir para uma poderosa abordagem de **planejamento urbano baseado em dados abertos**.
 
 ## 🧑‍💻 Autores 
-Lucas Marques dos Santos e Leonardo Pessoa Cavalcanti 
+Lucas Marques dos Santos e Leonardo Pessoa Cavalcanti. 
 
-## 📹 Link para vídeo sobre projeto
+## 📹 Link para vídeo sobre o projeto
 Link: https://drive.google.com/file/d/1zHTAW9ncozjCjFKDrhrepqUBXyDiaaqz/view?usp=sharing
