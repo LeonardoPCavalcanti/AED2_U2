@@ -6,7 +6,7 @@ O objetivo é estimar o **menor comprimento total de vias** necessário para int
 
 ---
 
-## Objetivos e Fundamentação
+## 🎯 Objetivos e Fundamentação
 
 O método combina dois algoritmos fundamentais:  
 - **A\*** encontra o menor caminho entre dois pontos utilizando heurística **great-circle**, que leva em conta a curvatura da Terra e garante eficiência e otimalidade.  
@@ -16,7 +16,7 @@ Essa integração permite estudar a **eficiência da malha urbana**, a **distrib
 
 ---
 
-## Estrutura da Solução
+## ⚙️ Estrutura da Solução
 
 1. Obtenção da rede viária (`graph_from_place`).  
 2. Conversão da malha para grafo não-direcionado.  
@@ -29,7 +29,26 @@ Essa integração permite estudar a **eficiência da malha urbana**, a **distrib
 
 ---
 
-## Resultados Obtidos
+## 🛠️ Tecnologias Utilizadas
+
+- **Python 3.13+**: Linguagem de programação principal utilizada no projeto.
+- **OSMnx**: Biblioteca para obtenção e manipulação de dados do OpenStreetMap.
+- **NetworkX**: Biblioteca para criação, manipulação e análise de grafos complexos.
+- **Jupyter Notebook**: Ambiente interativo para desenvolvimento e apresentação do projeto.
+- **Pandas** - Processamento de dados.
+- **Matplotlib** - Visualização de grafos 2D.
+
+---
+
+## 💻 Ferramentas e Ambientes
+- [Jupyter Notebook](https://jupyter.org/) - Ambiente interativo de desenvolvimento
+- [Google Colab](https://colab.research.google.com/) - Ambiente online gratuito para notebooks
+- [Anaconda](https://www.anaconda.com/) - Distribuição Python para ciência de dados
+- [Visual Studio Code](https://code.visualstudio.com/) - Editor de código recomendado
+
+---
+
+## 📊 Resultados Obtidos
 
 | Cidade                        | POIs (shoppings) | MST_total_m | Status | Tempo (s) |
 |:------------------------------|:----------------:|------------:|:------:|----------:|
@@ -45,31 +64,40 @@ Essa integração permite estudar a **eficiência da malha urbana**, a **distrib
 
 ---
 
-## Análise Crítica
+## 🔍 Análise Crítica
 
-A análise dos resultados revela diferenças marcantes no padrão de urbanização e distribuição comercial entre as capitais nordestinas. Cidades menores e mais compactas, como **Teresina** e **Aracaju**, apresentaram os menores valores de MST, o que indica que seus centros comerciais se concentram em regiões próximas e conectadas por uma malha viária eficiente. À medida que observamos cidades com maior porte populacional e expansão territorial, como **João Pessoa**, **Maceió** e **Recife**, o custo da MST aumenta devido à formação de eixos comerciais secundários e presença de barreiras naturais como rios, estuários e zonas costeiras.  
+**Teresina** apresentou a menor rede viária mínima para conectar seus shoppings, com cerca de **18,4 km**. Isso pode ser explicado pelo **menor número de shoppings (10)** e possivelmente por uma **maior concentração geográfica** desses estabelecimentos.
 
-No caso de **Natal**, apesar de ter uma malha relativamente densa na zona central, a grande quantidade de shoppings distribuídos em regiões periféricas e ao longo do eixo sul eleva o custo total. Já cidades como **São Luís**, **Fortaleza** e principalmente **Salvador** apresentam cenários de urbanização policêntrica, onde múltiplos polos comerciais foram formados ao longo de décadas, espalhando-se por vasta área e exigindo longas conexões viárias entre eles. Essas cidades também possuem acidentes geográficos significativos, como baías, lagoas, dunas e áreas de preservação, que fragmentam a malha urbana e obrigam o algoritmo a percorrer rotas mais extensas.  
+**Salvador** obteve o maior custo, necessitando de **quase 116 km** de vias para interligar seus **114 shoppings**.  A grande extensão territorial da cidade, sua **geografia acidentada** e o **alto número de POIs** contribuem para esse resultado.
+
+Há uma **tendência clara**: cidades com mais shoppings tendem a ter uma **MST maior**. **São Luís (124 POIs)**, **Fortaleza (122 POIs)** e **Salvador (114 POIs)** ocupam as últimas posições, com as **maiores distâncias totais**. No entanto, essa relação **não é linear**. **Natal (74 POIs)** tem mais que o dobro de shoppings de **Recife (32 POIs)**, mas a diferença na MST é pequena — apenas **cerca de 800 metros**. Isso sugere que, em Natal, os shoppings podem estar **mais densamente agrupados**, ou a **malha viária é mais eficiente** para essas conexões do que em Recife, onde **barreiras geográficas** (como rios) podem aumentar as distâncias.
+
+**Aracaju** e **Maceió**, com valores de MST próximos (**31 km** e **30,5 km**, respectivamente), demonstram uma **conectividade similar** para seus centros comerciais, apesar de Aracaju ter **mais shoppings (31 contra 21)**.  
+Isso pode indicar um **planejamento urbano mais centralizado** em Aracaju.
+
+Por fim, **João Pessoa** destaca-se pela **eficiência**: mesmo com **37 shoppings** (mais que Recife e Aracaju), sua MST é de apenas **25,9 km**, a **segunda menor do estudo**.  
+Isso aponta para uma **excelente distribuição espacial** dos shoppings ou uma **malha viária muito direta**.
+
 
 Outro aspecto relevante é a qualidade e completude dos dados do **OpenStreetMap**, que pode variar entre regiões, influenciando a quantidade detectada de shoppings e sua geolocalização. Além disso, cidades com maior número de POIs apresentam aumento expressivo no custo computacional, pois o grafo completo cresce quadraticamente. Mesmo com essas limitações, o estudo oferece uma visão robusta da conectividade urbana e permite comparar objetivamente como a geografia, o planejamento urbano e a expansão comercial influenciam o custo mínimo necessário para integrar os principais centros de consumo.
 
 ---
 
-## Conclusão
+## 🏁 Conclusão
 
 A combinação entre **A\*** e **MST** se mostra eficaz para investigar a conectividade urbana e analisar a distribuição espacial de atividades comerciais. Os resultados permitem não apenas compreender as diferenças estruturais entre as capitais nordestinas, mas também fornecer subsídios para estudos de **mobilidade**, **logística urbana**, **localização de serviços**, e **planejamento estratégico** baseado em dados abertos.
 
 ---
 
-## Tecnologias Utilizadas
-- Python 3.13+  
-- OSMnx  
-- NetworkX  
-- Pandas  
-- Matplotlib  
-- Jupyter Notebook  
-
----
-
-## Autores  
+## 🧑‍💻 Autores  
 Lucas Marques dos Santos e Leonardo Pessoa Cavalcanti.
+
+## 🔗 Links Úteis
+
+- [Documentação do Python](https://docs.python.org/3/)
+- [Documentação do OSMnx](https://osmnx.readthedocs.io/)
+- [Documentação do NetworkX](https://networkx.org/documentation/stable/)
+- [Jupyter Notebook](https://jupyter.org/)
+- [Documentação do Pandas](https://pandas.pydata.org/docs/) 
+- [Documentação do Matplotlib](https://matplotlib.org/stable/index.html)
+- [Vídeo Sobre o Projeto](https://drive.google.com/file/d/1zHTAW9ncozjCjFKDrhrepqUBXyDiaaqz/view?usp=sharing)
