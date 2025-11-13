@@ -72,11 +72,9 @@ Essa integração permite estudar a **eficiência da malha urbana**, a **distrib
 
 Há uma **tendência clara**: cidades com mais shoppings tendem a ter uma **MST maior**. **São Luís (124 POIs)**, **Fortaleza (122 POIs)** e **Salvador (114 POIs)** ocupam as últimas posições, com as **maiores distâncias totais**. No entanto, essa relação **não é linear**. **Natal (74 POIs)** tem mais que o dobro de shoppings de **Recife (32 POIs)**, mas a diferença na MST é pequena — apenas **cerca de 800 metros**. Isso sugere que, em Natal, os shoppings podem estar **mais densamente agrupados**, ou a **malha viária é mais eficiente** para essas conexões do que em Recife, onde **barreiras geográficas** (como rios) podem aumentar as distâncias.
 
-**Aracaju** e **Maceió**, com valores de MST próximos (**31 km** e **30,5 km**, respectivamente), demonstram uma **conectividade similar** para seus centros comerciais, apesar de Aracaju ter **mais shoppings (31 contra 21)**.  
-Isso pode indicar um **planejamento urbano mais centralizado** em Aracaju.
+**Aracaju** e **Maceió**, com valores de MST próximos (**31 km** e **30,5 km**, respectivamente), demonstram uma **conectividade similar** para seus centros comerciais, apesar de Aracaju ter **mais shoppings (31 contra 21)**. Isso pode indicar um **planejamento urbano mais centralizado** em Aracaju.
 
-Por fim, **João Pessoa** destaca-se pela **eficiência**: mesmo com **37 shoppings** (mais que Recife e Aracaju), sua MST é de apenas **25,9 km**, a **segunda menor do estudo**.  
-Isso aponta para uma **excelente distribuição espacial** dos shoppings ou uma **malha viária muito direta**.
+Por fim, **João Pessoa** destaca-se pela **eficiência**: mesmo com **37 shoppings** (mais que Recife e Aracaju), sua MST é de apenas **25,9 km**, a **segunda menor do estudo**. Isso aponta para uma **excelente distribuição espacial** dos shoppings ou uma **malha viária muito direta**.
 
 
 Outro aspecto relevante é a qualidade e completude dos dados do **OpenStreetMap**, que pode variar entre regiões, influenciando a quantidade detectada de shoppings e sua geolocalização. Além disso, cidades com maior número de POIs apresentam aumento expressivo no custo computacional, pois o grafo completo cresce quadraticamente. Mesmo com essas limitações, o estudo oferece uma visão robusta da conectividade urbana e permite comparar objetivamente como a geografia, o planejamento urbano e a expansão comercial influenciam o custo mínimo necessário para integrar os principais centros de consumo.
