@@ -1,122 +1,75 @@
-#  A* + MST
 
-Este projeto integra os conceitos de **busca heurística (A\*)** e **Árvore Geradora Mínima (MST)** aplicados à malha viária real de cidades brasileiras.  
-O objetivo é **estimar a distância total mínima necessária para interligar pontos de interesse (POIs)** em cada cidade, utilizando dados reais obtidos do **OpenStreetMap** através da biblioteca **OSMnx**, combinados com os algoritmos do **NetworkX**.
+# A* + MST — Conectividade Viária entre Shoppings no Nordeste Brasileiro
 
----
-
-## 🎯 Objetivos e Fundamentação
-
-O trabalho propõe a aplicação conjunta dos algoritmos **A\*** (A-Star) e **Kruskal** (MST) em contextos geográficos reais.  
-O **A\*** permite encontrar o menor caminho entre dois pontos, incorporando uma heurística que reduz o custo computacional e garante otimalidade quando admissível.  
-A **MST (Árvore Geradora Mínima)**, por sua vez, fornece a menor soma de distâncias possível para conectar todos os POIs sem ciclos.
-
-Assim, ao combinar ambos, obtemos uma estimativa do **menor comprimento total necessário para conectar todos os pontos de interesse urbanos** por vias reais — o que pode representar, por exemplo, o comprimento mínimo de infraestrutura (estradas, cabos, tubulações, etc.) necessária para integrar serviços distribuídos na cidade.
+Este projeto aplica os algoritmos **A\*** e **Árvore Geradora Mínima (MST)** para analisar a conectividade dos shoppings das **nove capitais do Nordeste**.  
+O objetivo é estimar o **menor comprimento total de vias** necessário para interligar todos os centros comerciais de cada cidade, utilizando dados reais do **OpenStreetMap (OSM)** e técnicas de grafos.
 
 ---
 
-## ⚙️ Estrutura da Solução
+## Objetivos e Fundamentação
 
-1. **Modelagem do grafo viário:**  
-   O grafo é obtido a partir do OpenStreetMap usando OSMnx, representando ruas, avenidas e conexões.  
-   Foi utilizada a função `graph_from_place` com o tipo de rede `drive` (vias veiculares).
+O método combina dois algoritmos fundamentais:  
+- **A\*** encontra o menor caminho entre dois pontos utilizando heurística **great-circle**, que leva em conta a curvatura da Terra e garante eficiência e otimalidade.  
+- **MST**, implementada via algoritmo de **Kruskal**, determina a menor soma total de distâncias capaz de conectar todos os POIs.  
 
-2. **Conversão e correção de atributos:**  
-   Utilizou-se `ox.convert.to_undirected(G)` para tornar o grafo não-direcionado e `ox.distance.add_edge_lengths(G)` para garantir que todas as arestas possuam o atributo de comprimento (`length`).
-
-3. **Cálculo de rotas A\*:**  
-   O algoritmo A\* (`networkx.astar_path_length`) foi empregado entre todos os pares de POIs, com heurística **geodésica (great-circle)** — baseada na distância direta entre as coordenadas geográficas dos nós.  
-   Essa heurística é **admissível**, pois nunca superestima a distância real, garantindo que os caminhos encontrados sejam ótimos.
-
-4. **Formação do grafo completo de POIs:**  
-   Cada cidade tem um grafo reduzido em que os vértices são os POIs (ex.: hospitais) e as arestas são ponderadas pelas distâncias calculadas via A\*.
-
-5. **Cálculo da MST (Kruskal):**  
-   Com o grafo completo ponderado, aplicou-se `networkx.minimum_spanning_edges`, equivalente ao algoritmo de **Kruskal**, para determinar a **menor soma total de arestas** capaz de conectar todos os POIs.
-
-6. **Reconstrução das rotas reais e visualização:**  
-   Cada aresta da MST foi mapeada de volta ao grafo viário original, reconstruindo o caminho real.  
-   As rotas foram sobrepostas ao mapa para permitir uma **visualização espacial da conectividade mínima**.
-
-7. **Comparação entre 8 cidades nordestinas:**  
-   O pipeline foi executado em **Natal, João Pessoa, Recife, Maceió, Fortaleza, Teresina, São Luís e Aracaju**, com até 10 hospitais por cidade como POIs.
+Essa integração permite estudar a **eficiência da malha urbana**, a **distribuição dos centros comerciais** e o custo mínimo necessário para conectá-los.
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Estrutura da Solução
 
-- **Python 3.13+**: Linguagem de programação principal utilizada no projeto.
-- **OSMnx**: Biblioteca para obtenção e manipulação de dados do OpenStreetMap.
-- **NetworkX**: Biblioteca para criação, manipulação e análise de grafos complexos.
-- **Jupyter Notebook**: Ambiente interativo para desenvolvimento e apresentação do projeto.
-- **Pandas** - Processamento de dados.
-- **Matplotlib** - Visualização de grafos 2D.
-
----
-
-### 💻 Ferramentas e Ambientes
-- [Jupyter Notebook](https://jupyter.org/) - Ambiente interativo de desenvolvimento
-- [Google Colab](https://colab.research.google.com/) - Ambiente online gratuito para notebooks
-- [Anaconda](https://www.anaconda.com/) - Distribuição Python para ciência de dados
-- [Visual Studio Code](https://code.visualstudio.com/) - Editor de código recomendado
+1. Obtenção da rede viária (`graph_from_place`).  
+2. Conversão da malha para grafo não-direcionado.  
+3. Coleta de **todos os shoppings** mapeados (`shop=mall`).  
+4. Associação dos POIs ao nó mais próximo da malha.  
+5. Construção do grafo completo entre POIs com distâncias via A*.  
+6. Cálculo da MST para determinar o menor conjunto de conexões.  
+7. Reconstrução das rotas reais na malha urbana.  
+8. Comparação detalhada entre as capitais.
 
 ---
 
-## 📊 Resultados Obtidos
+## Resultados Obtidos
 
-| Cidade                        | POIs | MST_total_m | Status | Tempo (s) |
-|:------------------------------|:----:|------------:|:------:|----------:|
-| Aracaju, Sergipe              | 10   | 10774.997   | ok     | 23.92 |
-| Fortaleza, Ceará              | 10   | 17648.124   | ok     | 71.22 |
-| Natal, Rio Grande do Norte    | 10   | 20535.259   | ok     | 33.85 |
-| João Pessoa, Paraíba          | 10   | 20746.817   | ok     | 29.71 |
-| São Luís, Maranhão            | 10   | 21309.475   | ok     | 50.63 |
-| Teresina, Piauí               | 10   | 23163.823   | ok     | 55.50 |
-| Maceió, Alagoas               | 10   | 25816.122   | ok     | 31.14 |
-| Recife, Pernambuco            | 10   | 30893.052   | ok     | 56.82 |
-
----
-
-## 🔍 Análise Crítica dos Resultados
-
-As diferenças nos valores da MST entre as capitais refletem a **estrutura urbana** e o **grau de conectividade da malha viária** de cada cidade.  
-Cidades mais compactas e bem conectadas, como **Aracaju (≈10,8 km)** e **Fortaleza (≈17,6 km)**, apresentaram **menores distâncias totais**, indicando que seus POIs estão mais próximos e acessíveis por rotas diretas.  
-Já cidades como **Recife (≈30,9 km)** e **Maceió (≈25,8 km)** exibiram valores mais elevados, sugerindo **distribuição mais dispersa dos hospitais** e presença de **barreiras geográficas** (rios, áreas costeiras, pontes e vias sinuosas) que ampliam o trajeto médio.
-
-A **escolha dos POIs** exerce impacto significativo: ao selecionar **hospitais**, o modelo reflete uma distribuição que geralmente cobre toda a cidade, incluindo regiões periféricas, o que aumenta o custo total da MST.  
-Se fossem utilizados **POIs mais concentrados**, como escolas ou praças centrais, o valor total diminuiria substancialmente.  
-Essa dependência demonstra como o método é sensível à natureza e à localização dos pontos analisados.
-
-Entre as **limitações do método**, destacam-se:
-- Dependência da **qualidade e completude dos dados** do OpenStreetMap (nem todos os POIs estão mapeados com precisão uniforme).  
-- O modelo considera **apenas distâncias viárias**, ignorando fatores como **trânsito, topografia, sentidos das vias e acessibilidade**.  
-- O número de POIs é reduzido (10 por cidade), o que simplifica a realidade e limita a generalização dos resultados.  
-- O **A\*** trabalha em grafo planar e não incorpora restrições temporais ou dinâmicas (ex.: congestionamento).
-
-Apesar dessas restrições, os resultados oferecem uma **visão consistente da conectividade urbana**, permitindo comparações entre cidades quanto à eficiência de suas redes viárias.  
-O modelo pode ser expandido para estudos de **logística urbana, mobilidade de serviços públicos, transporte de emergência** e até **planejamento energético**, servindo como ferramenta analítica em decisões de infraestrutura.
+| Cidade                        | POIs (shoppings) | MST_total_m | Status | Tempo (s) |
+|:------------------------------|:----------------:|------------:|:------:|----------:|
+| Teresina, Piauí, Brazil       | 10  | 13 830.796 | ok | 48.10 |
+| João Pessoa, Paraíba, Brazil  | 37  | 25 865.062 | ok | 502.69 |
+| Maceió, Alagoas, Brazil       | 21  | 30 529.684 | ok | 99.17 |
+| Aracaju, Sergipe, Brazil      | 31  | 31 061.999 | ok | 29.19 |
+| Recife, Pernambuco, Brazil    | 32  | 50 037.275 | ok | 266.38 |
+| Natal, Rio Grande do Norte, Brazil | 74  | 50 805.824 | ok | 330.27 |
+| São Luís, Maranhão, Brazil    | 124 | 70 152.596 | ok | 215.79 |
+| Fortaleza, Ceará, Brazil      | 122 | 98 532.432 | ok | 436.87 |
+| Salvador, Bahia, Brazil       | 114 | 115 839.173 | ok | 642.89 |
 
 ---
 
-## 🏁 Conclusão
+## Análise Crítica
 
-A combinação entre **A\*** e **MST** provou ser uma ferramenta eficiente para **avaliar a conectividade urbana** de forma quantitativa e espacialmente explícita.  
-O estudo evidencia que cidades mais densas e planejadas exigem menor comprimento de vias para interligar serviços essenciais, enquanto cidades com expansão desordenada ou obstáculos naturais apresentam custos maiores.  
-Com ajustes e ampliações, este modelo pode evoluir para uma poderosa abordagem de **planejamento urbano baseado em dados abertos**.
+A análise dos resultados revela diferenças marcantes no padrão de urbanização e distribuição comercial entre as capitais nordestinas. Cidades menores e mais compactas, como **Teresina** e **Aracaju**, apresentaram os menores valores de MST, o que indica que seus centros comerciais se concentram em regiões próximas e conectadas por uma malha viária eficiente. À medida que observamos cidades com maior porte populacional e expansão territorial, como **João Pessoa**, **Maceió** e **Recife**, o custo da MST aumenta devido à formação de eixos comerciais secundários e presença de barreiras naturais como rios, estuários e zonas costeiras.  
 
----
+No caso de **Natal**, apesar de ter uma malha relativamente densa na zona central, a grande quantidade de shoppings distribuídos em regiões periféricas e ao longo do eixo sul eleva o custo total. Já cidades como **São Luís**, **Fortaleza** e principalmente **Salvador** apresentam cenários de urbanização policêntrica, onde múltiplos polos comerciais foram formados ao longo de décadas, espalhando-se por vasta área e exigindo longas conexões viárias entre eles. Essas cidades também possuem acidentes geográficos significativos, como baías, lagoas, dunas e áreas de preservação, que fragmentam a malha urbana e obrigam o algoritmo a percorrer rotas mais extensas.  
 
-## 🧑‍💻 Autores 
-Lucas Marques dos Santos e Leonardo Pessoa Cavalcanti. 
+Outro aspecto relevante é a qualidade e completude dos dados do **OpenStreetMap**, que pode variar entre regiões, influenciando a quantidade detectada de shoppings e sua geolocalização. Além disso, cidades com maior número de POIs apresentam aumento expressivo no custo computacional, pois o grafo completo cresce quadraticamente. Mesmo com essas limitações, o estudo oferece uma visão robusta da conectividade urbana e permite comparar objetivamente como a geografia, o planejamento urbano e a expansão comercial influenciam o custo mínimo necessário para integrar os principais centros de consumo.
 
 ---
 
-## 🔗 Links Úteis
+## Conclusão
 
-- [Documentação do Python](https://docs.python.org/3/)
-- [Documentação do OSMnx](https://osmnx.readthedocs.io/)
-- [Documentação do NetworkX](https://networkx.org/documentation/stable/)
-- [Jupyter Notebook](https://jupyter.org/)
-- [Documentação do Pandas](https://pandas.pydata.org/docs/) 
-- [Documentação do Matplotlib](https://matplotlib.org/stable/index.html)
-- [Vídeo Sobre o Projeto](https://drive.google.com/file/d/1zHTAW9ncozjCjFKDrhrepqUBXyDiaaqz/view?usp=sharing)
+A combinação entre **A\*** e **MST** se mostra eficaz para investigar a conectividade urbana e analisar a distribuição espacial de atividades comerciais. Os resultados permitem não apenas compreender as diferenças estruturais entre as capitais nordestinas, mas também fornecer subsídios para estudos de **mobilidade**, **logística urbana**, **localização de serviços**, e **planejamento estratégico** baseado em dados abertos.
+
+---
+
+## Tecnologias Utilizadas
+- Python 3.13+  
+- OSMnx  
+- NetworkX  
+- Pandas  
+- Matplotlib  
+- Jupyter Notebook  
+
+---
+
+## Autores  
+Lucas Marques dos Santos e Leonardo Pessoa Cavalcanti.
