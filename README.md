@@ -90,6 +90,8 @@ A combinação entre **A\*** e **MST** se mostra eficaz para investigar a conect
 ## 🧑‍💻 Autores  
 Lucas Marques dos Santos e Leonardo Pessoa Cavalcanti.
 
+---
+
 ## 🔗 Links Úteis
 
 - [Documentação do Python](https://docs.python.org/3/)
